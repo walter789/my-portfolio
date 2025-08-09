@@ -1,0 +1,18 @@
+name: Gemini CLI Pull Request Review
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/run-gemini-cli@v1
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          prompt: |
+            You are an expert software developer and you are reviewing a pull request.
+            You are given the diff of the pull request. Provide a concise, professional
+            review with constructive feedback, identify potential bugs, and suggest improvements.
+            Do not include file paths or line numbers in your response.
